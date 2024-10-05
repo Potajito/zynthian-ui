@@ -37,7 +37,7 @@ from zyngui.zynthian_gui_selector import zynthian_gui_selector
 
 
 class zynthian_gui_zs3(zynthian_gui_selector):
-
+	
 	def __init__(self):
 		super().__init__('Program', True)
 		

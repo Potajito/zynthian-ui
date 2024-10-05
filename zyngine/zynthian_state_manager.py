@@ -126,6 +126,7 @@ class zynthian_state_manager:
         self.status_midi_clock = False
         self.update_available = False  # True when updates available from repositories
         self.checking_for_updates = False  # True whilst checking for updates
+        self.current_zs3_title: str = ""
 
         self.midi_filter_script = None
         self.midi_learn_state = False
@@ -1304,9 +1305,12 @@ class zynthian_state_manager:
                 except:
                     self.zctrl_y = None
 
+        self.current_zs3_title = self.get_zs3_title(zs3_id)
         zynsigman.send(zynsigman.S_STATE_MAN, self.SS_LOAD_ZS3, zs3_id=zs3_id)
         return True
 
+
+    
     def save_zs3(self, zs3_id=None, title=None):
         """Store current state as ZS3
 

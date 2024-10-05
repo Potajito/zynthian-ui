@@ -811,7 +811,6 @@ class zynthian_gui_mixer(zynthian_gui_base.zynthian_gui_base):
 				self.exit_midi_learn()
 				zynsigman.unregister(zynsigman.S_AUDIO_MIXER, self.zynmixer.SS_ZCTRL_SET_VALUE, self.update_control)
 				zynsigman.unregister(zynsigman.S_STATE_MAN, self.zyngui.state_manager.SS_LOAD_ZS3, self.cb_load_zs3)
-				zynsigman.unregister(zynsigman.S_STATE_MAN, self.zyngui.state_manager.SS_LOAD_ZS3, self.on_zs3_load)
 				zynsigman.unregister(zynsigman.S_CHAIN_MAN, self.zyngui.chain_manager.SS_SET_ACTIVE_CHAIN, self.update_active_chain)
 				zynsigman.unregister(zynsigman.S_AUDIO_RECORDER, zynthian_audio_recorder.SS_AUDIO_RECORDER_ARM, self.update_control_arm)
 				zynsigman.unregister(zynsigman.S_AUDIO_RECORDER, zynthian_audio_recorder.SS_AUDIO_RECORDER_STATE, self.update_control_rec)
@@ -838,7 +837,6 @@ class zynthian_gui_mixer(zynthian_gui_base.zynthian_gui_base):
 		else:
 			zynsigman.register(zynsigman.S_AUDIO_MIXER, self.zynmixer.SS_ZCTRL_SET_VALUE, self.update_control)
 			zynsigman.register_queued(zynsigman.S_STATE_MAN, self.zyngui.state_manager.SS_LOAD_ZS3, self.cb_load_zs3)
-			zynsigman.register_queued(zynsigman.S_STATE_MAN, self.zyngui.state_manager.SS_LOAD_ZS3, self.on_zs3_load)
 			zynsigman.register_queued(zynsigman.S_CHAIN_MAN, self.zyngui.chain_manager.SS_SET_ACTIVE_CHAIN, self.update_active_chain)
 			zynsigman.register_queued(zynsigman.S_AUDIO_RECORDER, zynthian_audio_recorder.SS_AUDIO_RECORDER_ARM, self.update_control_arm)
 			zynsigman.register_queued(zynsigman.S_AUDIO_RECORDER, zynthian_audio_recorder.SS_AUDIO_RECORDER_STATE, self.update_control_rec)
@@ -901,13 +899,6 @@ class zynthian_gui_mixer(zynthian_gui_base.zynthian_gui_base):
 
 	def cb_load_zs3(self, zs3_id):
 		self.refresh_visible_strips()
-
-	def on_zs3_load(**kwargs):
-		zs3_id = kwargs.get('zs3_id', None)
-		if zs3_id:
-			print(f"ZS3 ID received: {zs3_id}")
-		else:
-			print("ZS3 ID not found in the signal")
  
 	# --------------------------------------------------------------------------
 	# Mixer Functionality
